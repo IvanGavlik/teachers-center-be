@@ -5,4 +5,4 @@ COPY project.clj /usr/src/app/
 RUN lein deps
 COPY . /usr/src/app
 RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" teachers-center-be-standalone.jar
-CMD ["java", "-jar", "teachers-center-be-standalone.jar"]
+ENTRYPOINT ["java", "-jar", "teachers-center-be-standalone.jar"]

@@ -2,6 +2,7 @@
   (:require
     [ring.adapter.jetty :as jetty]
     [teachers-center-be.routes :as routes]
+    [teachers-center-be.openapi.openapi :as openapi]
     )
   (:gen-class)
   )
@@ -35,9 +36,12 @@
     )
   )
 
+
 (defn -main [& args]
   "I don't do a whole lot."
   (jetty/run-jetty routes/routes {:port 3000
                       :join? false})
-  (println "Welcome to teachers center! There are your args: " args)
+  (println "Welcome to teachers center! ")
+  (swap! openapi/open-api-key (fn [_] (first args)))
+  (println "key " @openapi/open-api-key)
   )
