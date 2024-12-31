@@ -28,7 +28,6 @@
   )
 
 (defn generate-questions-on-text [language, language-level, text, topic-questions, grammar]
-  (println "generate-questions-on-text " text)
   (if (> topic-questions 0)
     (let [questions-request (str " For my class I need " topic-questions " tasks on vocabulary from the text " text " . Each task should have at least 5 subtask. Here are instructions for first 3 tasks (other tasks generate on your own)
       First task should be circled whether the statement is true or false, the statements are based on the text " text "

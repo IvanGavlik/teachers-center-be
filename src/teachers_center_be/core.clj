@@ -1,6 +1,8 @@
 (ns teachers-center-be.core
   (:require
     [ring.adapter.jetty :as jetty]
+    [ring.middleware.params :as params]
+    [ring.middleware.multipart-params :as form-params]
     [teachers-center-be.routes :as routes]
     [teachers-center-be.openapi.openapi :as openapi]
     )
@@ -36,10 +38,14 @@
     )
   )
 
+(def app (-> routes/routes
+             params/wrap-params
+             form-params/wrap-multipart-params
+             ))
 
 (defn -main [& args]
   "I don't do a whole lot."
-  (jetty/run-jetty routes/routes {:port 3000
+  (jetty/run-jetty app {:port 3000
                       :join? false})
   (println "Welcome to teachers center! ")
   (swap! openapi/open-api-key (fn [_] (first args)))
