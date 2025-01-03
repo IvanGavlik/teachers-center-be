@@ -21,13 +21,18 @@
 ;; common-phrases: boolean
 
 ;; for the student
+
+(def space " ")
+
 (defn generate-text [language, language-level, topic, topic-size, grammar]
+  (println "generate-text " language space language-level space topic space topic-size space grammar)
   (let [text-request (str " For my class I need a text on the topic " topic ". Text hast to be in the " language " language on the " language-level ". Generate the text in such a way that the includes grammar topic "  grammar ". Text should be around "  topic-size " words. Test hast to have title. ")]
     (str (openapi/chat-with-open-api-system-teacher text-request) new-line-md)
     )
   )
 
 (defn generate-questions-on-text [language, language-level, text, topic-questions, grammar]
+  (println "generate-questions-on-text " language space language-level space text space topic-questions space grammar)
   (if (> topic-questions 0)
     (let [questions-request (str " For my class I need " topic-questions " tasks on vocabulary from the text " text " . Each task should have at least 5 subtask. Here are instructions for first 3 tasks (other tasks generate on your own)
       First task should be circled whether the statement is true or false, the statements are based on the text " text "
@@ -47,6 +52,7 @@
 
 ;; TODO sometimes explanations are gennerated in english change this
 (defn generate-grammar [language, language-level, text, grammar, grammar-examples]
+  (println "generate-grammar " language space language-level space text space grammar space grammar-examples)
   (if (> grammar-examples 0)
     (let [grammar-request-examples (str " Make detail explanation of " grammar " for language " language " for student at level " language-level " . It should be stated when it is used, how it is formed. Be sure to note the exceptions and create examples.
   When explaining use creativity and last modern approach to teaching with keeping in mid that it should be suitable for student at " language-level " level . Here is text " text " use it as inspiration for examples and explanations.
@@ -60,6 +66,7 @@
       )))
 
 (defn generate-grammar-exercises [language, language-level, text, grammar, grammar-exercises]
+  (println "generate-grammar-exercises " language space language-level space text space grammar space grammar-exercises)
   (if (> grammar-exercises 0)
     (let [grammar-exercises-request (str " Here is text " text ". Here is grammar explanation " grammar ". Create " grammar-exercises " task on grammar topic. In the tasks try to cover important grammar cases and use vocabulary from the text.
     Next task should be more complicated and harder than the previous one but all for " language-level " language level. Use " language "
@@ -70,6 +77,7 @@
     ))
 
 (defn generate-homework [language, language-level, text, grammar, homework]
+  (println "generate-homework " language space language-level space text space grammar)
   (if homework
     (let [homework-request (str " Create homework for student of " language " language at " language-level " level. Focus on topic of " text " also have grammar tasks. Grammar topic is " grammar ".
     Homework tasks should be appropriate for student level " language-level " and written in  " language ".")]
@@ -80,6 +88,7 @@
   )
 
 (defn generate-discussion [language, language-level, topic, text, grammar, discussion]
+  (println "generate-discussion " language space language-level space topic space text space grammar space discussion)
   (if discussion
     (let [discussion-request (str " I would like to have discussion about this text " text " so create questions, so that we can have conversation in " language " language on " language-level " level
     . When comes to grammar focus on this " grammar
@@ -91,6 +100,7 @@
   )
 
 (defn generate-dictionary [language, language-level, text dictionary]
+  (println "generate-dictionary " language space language-level space text space dictionary)
   (if dictionary
     (let [dictionary-request (str " From the text " text " make dictionary of nouns, verbs and other important thinks for student at language " language-level ". Put
     all relevant info for nouns like article, plural for verbs conjugation and so on. Use language " language)]
@@ -101,6 +111,7 @@
   )
 
 (defn generate-common-phrases [language, language-level, topic, common-phrases]
+  (println "generate-common-phrases " language space language-level space topic space common-phrases)
   (if common-phrases
     (let [common-phrases-request (str " Generate at least 5 (ideally should be more) common phrases on topic of " topic " on language " language " for student on language level " language-level "- Common phrases has to be written in " language) ]
       (str (openapi/chat-with-open-api-system-teacher common-phrases-request) new-line-md)

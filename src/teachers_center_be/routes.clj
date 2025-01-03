@@ -23,7 +23,7 @@
 (def grammar "grammar")
 (def topic-questions "topic-questions")
 
-
+;; TODO no need for params
 (defn api-key [request]
   (str @openapi/open-api-key)
   )
