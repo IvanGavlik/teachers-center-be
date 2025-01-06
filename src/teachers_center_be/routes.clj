@@ -33,7 +33,7 @@
   (let [params (get request :params)
         text (lecture/generate-text (get params language) (get params language-level) (get params topic) (get params topic-size) (get params grammar))
         ]
-    (str text)
+    (plain text)
     )
   )
 
