@@ -10,7 +10,11 @@
 (defn plain
   [text]
   {:status  200
-   :headers {"Access-Control-Allow-Origin" "*"}
+   :headers {
+             "Content-Type" "text/plain"
+             "Access-Control-Allow-Origin" "https://ivangavlik.github.io"
+             "Access-Control-Allow-Headers" "Content-Type"
+             "Access-Control-Allow-Methods" "OPTIONS, POST"}
    :body text})
 
 (def language "language")
