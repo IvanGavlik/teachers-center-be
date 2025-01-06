@@ -10,7 +10,14 @@
 (defn plain
   [text]
   (comment   {:status  200
-              :headers {"Access-Control-Allow-Origin" "*"}
+              :headers {
+              "Content-Type" "text/plain"
+              "Access-Control-Allow-Origin" "https://ivangavlik.github.io/teachers-center/"
+              "Access-Control-Allow-Headers" "*"
+              "Access-Control-Allow-Methods" "GET, POST, PUT, OPTIONS"
+              "Cache-Control" "no-store"
+              "Vary" "Origin"
+                        }
               :body    text})
   (str text)
 )
