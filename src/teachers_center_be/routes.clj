@@ -2,6 +2,7 @@
   (:require
     [ring.middleware.params :as params]
     [compojure.core :as compojure]
+    [ring.util.response :as response]
     [teachers-center-be.openapi.openapi :as openapi]
     [teachers-center-be.lecture.generate-lecture :as lecture]
     )
@@ -10,7 +11,7 @@
 (defn plain
   [text]
   {:status  200
-   :headers {"Access-Control-Allow-Origin" "*"}
+   :headers {"Access-Control-Allow-Origin" "https://ivangavlik.github.io"}
    :body text})
 
 
@@ -101,6 +102,13 @@
 (compojure/defroutes routes
                      (compojure/GET "/key" request (api-key request))
                      (compojure/POST "/generate-lecture/lecture-text" request (generate-lecture-text request))
+                     (compojure/OPTIONS "/generate-lecture/lecture-text" _
+                       (response/response "")
+                       {:status  204
+                        :headers {"Access-Control-Allow-Origin" "https://ivangavlik.github.io"
+                                  "Access-Control-Allow-Methods" "OPTIONS, POST"
+                                  "Access-Control-Allow-Headers" "Content-Type"
+                                  "Content-Type" "text/plain"}})
                      (compojure/POST "/generate-lecture/text-questions" request (generate-lecture-text-questions request))
                      (compojure/POST "/generate-lecture/grammar-explanation" request (generate-lecture-grammar-explanation request))
                      (compojure/POST "/generate-lecture/grammar-exercises" request (generate-lecture-grammar-exercises request))
