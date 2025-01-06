@@ -24,7 +24,7 @@
 
 ;; TODO no need for params
 (defn api-key [request]
-  (str @openapi/open-api-key)
+  (plain @openapi/open-api-key)
   )
 
 
