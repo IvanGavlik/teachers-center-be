@@ -9,7 +9,7 @@
 
 (defn plain
   [text]
-  (comment   {:status  200
+  {:status  200
               :headers {
               "Content-Type" "text/plain"
               "Access-Control-Allow-Origin" "https://ivangavlik.github.io"
@@ -18,8 +18,7 @@
               "Cache-Control" "no-store"
               "Vary" "Origin"
                         }
-              :body    text})
-  (str text)
+              :body    text}
 )
 
 (def language "language")
