@@ -13,8 +13,8 @@
    :headers {
              "Content-Type" "text/plain"
              "Access-Control-Allow-Origin" "https://ivangavlik.github.io"
-             "Access-Control-Allow-Headers" "Content-Type"
-             "Access-Control-Allow-Methods" "OPTIONS, POST"}
+             "Access-Control-Allow-Headers" "*"
+             "Access-Control-Allow-Methods" "GET OPTIONS, POST"}
    :body text})
 
 (def language "language")
