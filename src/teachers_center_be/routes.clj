@@ -124,9 +124,28 @@
                        options-response)
 
                      (compojure/POST "/generate-lecture/grammar-exercises" request (generate-lecture-grammar-exercises request))
+                     (compojure/OPTIONS "/generate-lecture/grammar-exercises" _
+                       (response/response "")
+                       options-response)
+
                      (compojure/POST "/generate-lecture/homework" request (generate-lecture-homework request))
+                     (compojure/OPTIONS "/generate-lecture/homework" _
+                       (response/response "")
+                       options-response)
+
                      (compojure/POST "/generate-lecture/discussion" request (generate-lecture-discussion request))
+                     (compojure/OPTIONS "/generate-lecture/discussion" _
+                       (response/response "")
+                       options-response)
+
                      (compojure/POST "/generate-lecture/dictionary" request (generate-lecture-dictionary request))
+                     (compojure/OPTIONS "/generate-lecture/dictionary" _
+                       (response/response "")
+                       options-response)
+
                      (compojure/POST "/generate-lecture/phrases" request (generate-lecture-phrases request))
+                     (compojure/OPTIONS "/generate-lecture/phrases" _
+                       (response/response "")
+                       options-response)
 
                      )
