@@ -99,18 +99,30 @@
     )
   )
 
+(def options-response
+  {:status  204
+   :headers {"Access-Control-Allow-Origin" "https://ivangavlik.github.io"
+             "Access-Control-Allow-Methods" "OPTIONS, POST"
+             "Access-Control-Allow-Headers" "Content-Type"
+             "Content-Type" "text/plain"}})
+
 (compojure/defroutes routes
                      (compojure/GET "/key" request (api-key request))
                      (compojure/POST "/generate-lecture/lecture-text" request (generate-lecture-text request))
                      (compojure/OPTIONS "/generate-lecture/lecture-text" _
                        (response/response "")
-                       {:status  204
-                        :headers {"Access-Control-Allow-Origin" "https://ivangavlik.github.io"
-                                  "Access-Control-Allow-Methods" "OPTIONS, POST"
-                                  "Access-Control-Allow-Headers" "Content-Type"
-                                  "Content-Type" "text/plain"}})
+                       options-response)
+
                      (compojure/POST "/generate-lecture/text-questions" request (generate-lecture-text-questions request))
+                     (compojure/OPTIONS "/generate-lecture/text-questions" _
+                       (response/response "")
+                       options-response)
+
                      (compojure/POST "/generate-lecture/grammar-explanation" request (generate-lecture-grammar-explanation request))
+                     (compojure/OPTIONS "/generate-lecture/grammar-explanation" _
+                       (response/response "")
+                       options-response)
+
                      (compojure/POST "/generate-lecture/grammar-exercises" request (generate-lecture-grammar-exercises request))
                      (compojure/POST "/generate-lecture/homework" request (generate-lecture-homework request))
                      (compojure/POST "/generate-lecture/discussion" request (generate-lecture-discussion request))
