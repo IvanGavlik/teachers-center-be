@@ -34,4 +34,4 @@ https://medium.com/helpshift-engineering/understanding-ring-middlewares-and-comp
 ## Use docker 
 * start docker demon -> sudo systemctl start docker
 * build image run from project root folder (teachers-center-be) -> sudo docker build -t teacers-center-be .
-* run image -> sudo docker run -p 3000:3000 teacers-center-be -e API_KEY="api-key"
+* run image -> sudo docker run -p 3000:3000 -e API_KEY="api-key" teacers-center-be

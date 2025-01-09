@@ -1,6 +1,5 @@
 (ns teachers-center-be.routes
   (:require
-    [ring.middleware.params :as params]
     [compojure.core :as compojure]
     [ring.util.response :as response]
     [teachers-center-be.openapi.openapi :as openapi]
@@ -39,7 +38,7 @@
 
 (defn generate-lecture-text-questions [request]
   (let [params (get request :params)
-        text (get (get request :params) text)
+        text (get request :body)
         text-questions (lecture/generate-questions-on-text (get params language) (get params language-level) text (Integer/parseInt (get params topic-questions)) (get params grammar))
         ]
     (plain text-questions)
@@ -48,7 +47,7 @@
 
 (defn generate-lecture-grammar-explanation [request]
   (let [params (get request :params)
-        text (get (get request :params) text)
+        text (get request :body)
         grammar-explanation (lecture/generate-grammar (get params language) (get params language-level) text (get params grammar) (Integer/parseInt (get params "grammar-examples")))
         ]
     (plain grammar-explanation)
@@ -57,7 +56,7 @@
 
 (defn generate-lecture-grammar-exercises [request]
   (let [params (get request :params)
-        text (get (get request :params) text)
+        text (get request :body)
         grammar-exercises (lecture/generate-grammar-exercises (get params language) (get params language-level) text (get params grammar) (Integer/parseInt (get params "grammar-exercises")))
         ]
     (plain grammar-exercises)
@@ -66,7 +65,7 @@
 
 (defn generate-lecture-homework [request]
   (let [params (get request :params)
-        text (get (get request :params) text)
+        text (get request :body)
         homework (lecture/generate-homework (get params language) (get params language-level) text (get params grammar) (boolean (Boolean/valueOf (get params "homework"))))
         ]
     (plain homework)
@@ -75,7 +74,7 @@
 
 (defn generate-lecture-discussion [request]
   (let [params (get request :params)
-        text (get (get request :params) text)
+        text (get request :body)
         discussion (lecture/generate-discussion (get params language) (get params language-level) (get params topic) text (get params grammar) (boolean (Boolean/valueOf (get params "discussion"))))
         ]
     (plain discussion)
@@ -84,7 +83,7 @@
 
 (defn generate-lecture-dictionary [request]
   (let [params (get request :params)
-        text (get (get request :params) text)
+        text (get request :body)
         dictionary (lecture/generate-dictionary (get params language) (get params language-level) text (boolean (Boolean/valueOf (get params "dictionary"))))
         ]
     (plain dictionary)

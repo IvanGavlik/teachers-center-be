@@ -3,6 +3,7 @@
     [ring.adapter.jetty :as jetty]
     [ring.middleware.params :as params]
     [ring.middleware.multipart-params :as form-params]
+    [ring.middleware.json :as json]
     [teachers-center-be.routes :as routes]
     [teachers-center-be.openapi.openapi :as openapi]
     )
@@ -41,6 +42,7 @@
 (def app (-> routes/routes
              params/wrap-params
              form-params/wrap-multipart-params
+             json/wrap-json-body
              ))
 
 (defn -main [& args]
